@@ -20,6 +20,18 @@ jobs:
               -backend-config="key=dev/tfstate.tfstate" \
               -backend-config="region=ap-southeast-1" \
               -backend=true
+      - run:
+          name: terraform validate
+          command: |
+            terraform validate
+      - run:
+          name: terraform plan
+          command: |
+            terraform plan -var-file=config.tfvars
+      - run:
+          name: terraform apply
+          command: |
+            terraform apply -var-file=config.tfvars -auto-approve
 workflows:
   say-hello-workflow:
     jobs:
