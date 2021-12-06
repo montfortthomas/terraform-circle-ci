@@ -7,6 +7,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: display the env
+          command: |
+            echo ${environment}
+      - run:
           name: terraform init & plan
           command: |
             terraform init
