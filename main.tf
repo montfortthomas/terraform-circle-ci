@@ -12,7 +12,7 @@ module "vpc" {
 
 module "server" {
   source               = "./aws-modules/aws-instance"
-  ami                  = "ami-083654bd07b5da81d"
+  ami                  = "ami-0fed77069cd5a6d6c"
   availability_zone    = "${var.region}b"
   instance_type        = "c4.xlarge"
   key_name             = "circleci"
