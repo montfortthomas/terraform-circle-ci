@@ -1,13 +1,15 @@
 version: 2.1
 jobs:
-  say-hello:
+  plan-apply:
+    working_directory: /tmp/project
     docker:
-      - image: cimg/base:stable
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: terraform init & plan
+          command: |
+            terraform init
 
 workflows:
   say-hello-workflow:
