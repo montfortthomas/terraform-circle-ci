@@ -1,24 +1,26 @@
 version: 2.1
 jobs:
-  plan-apply:
+  provision:
     working_directory: /tmp/project
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - checkout
       - run:
-          name: display the env
+          name: Install dep pkg
           command: |
-            echo ${environment}
             apk add --no-cache python3 py3-pip 
             pip3 install --upgrade pip
             pip3 install --no-cache-dir awscli
       - run:
-          name: terraform init & plan
+          name: terraform init
           command: |
-            terraform init
-
+            terraform init \
+              -backend-config="bucket=circleci0612" \
+              -backend-config="key=dev/tfstate.tfstate" \
+              -backend-config="region=ap-southeast-1" \
+              -backend=true
 workflows:
   say-hello-workflow:
     jobs:
-      - plan-apply
+      - provision
