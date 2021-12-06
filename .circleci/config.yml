@@ -10,6 +10,8 @@ jobs:
           name: display the env
           command: |
             echo ${environment}
+            apt update
+            apt install awscli -y
       - run:
           name: terraform init & plan
           command: |
